@@ -2,13 +2,13 @@ module Handler.Guest where
 
 import Import
 
-getGuestR :: Handler RepHtml
-getGuestR = do
+getGuestCreateR :: Handler RepHtml
+getGuestCreateR = do
     (formWidget, formEnctype) <- generateFormPost guestForm
     defaultLayout $ $(widgetFile "form")
 
-postGuestR :: Handler RepHtml
-postGuestR = do
+postGuestCreateR :: Handler RepHtml
+postGuestCreateR = do
     ((formResult, formWidget), formEnctype) <- runFormPost guestForm
     case formResult of
         FormSuccess guest -> do
