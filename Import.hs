@@ -6,6 +6,7 @@ module Import
     , module Settings.Development
     , module Data.Monoid
     , module Control.Applicative
+    , module Control.Arrow
     , Text
 #if __GLASGOW_HASKELL__ < 704
     , (<>)
@@ -21,6 +22,7 @@ import Data.Monoid (Monoid (mappend, mempty, mconcat))
 import Data.Monoid (Monoid (mappend, mempty, mconcat), (<>))
 #endif
 import Control.Applicative ((<$>), (<*>), pure)
+import Control.Arrow ((&&&))
 import Data.Text (Text)
 import Settings.StaticFiles
 import Settings.Development
