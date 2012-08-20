@@ -7,3 +7,4 @@
 / HomeR GET POST
 
 /hello HelloR GET
+/hello/#String/#Int HelloArgsR GET
