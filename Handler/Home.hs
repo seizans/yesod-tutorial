@@ -3,6 +3,11 @@ module Handler.Home where
 
 import Import
 
+getHelloR :: Handler RepHtml
+getHelloR = do
+    let widget = $(widgetFile "hello")
+    defaultLayout widget
+
 -- This is a handler function for the GET request method on the HomeR
 -- resource pattern. All of your resource patterns are defined in
 -- config/routes
