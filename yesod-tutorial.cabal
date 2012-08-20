@@ -31,6 +31,7 @@ library
                      Handler.Home
                      Handler.Hello
                      Handler.FormTest
+                     Handler.Guest
 
     if flag(dev) || flag(library-only)
         cpp-options:   -DDEVELOPMENT
