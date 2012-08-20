@@ -6,7 +6,10 @@ getGuestsR :: Handler RepHtml
 getGuestsR = do
     guestEntities <- runDB $ selectList [] []
     -- GuestEntity は { entityKey :: GuestId, entityVal :: Guest } という感じ
-    defaultLayout $ $(widgetFile "guest-list")
+    (formWidget, formEnctype) <- generateFormPost guestForm
+    let guestFormWidget = $(widgetFile "form")
+        listWidget = $(widgetFile "guest-list")
+    defaultLayout $ $(widgetFile "guest-portal")
 
 getGuestR :: GuestId -> Handler RepHtml
 getGuestR guestId = do
