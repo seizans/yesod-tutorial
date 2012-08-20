@@ -2,6 +2,19 @@ module Handler.Guest where
 
 import Import
 
+getGuestR :: GuestId -> Handler RepHtml
+getGuestR guestId = do
+    guest <- runDB $ get404 guestId
+    (formWidget, formEnctype) <- generateFormPost $ guestForm' guest
+    defaultLayout $ $(widgetFile "form")
+
+putGuestR :: GuestId -> Handler RepHtml
+putGuestR guestId = undefined
+
+deleteGuestR :: GuestId -> Handler RepHtml
+deleteGuestR guestId = undefined
+
+
 getGuestCreateR :: Handler RepHtml
 getGuestCreateR = do
     (formWidget, formEnctype) <- generateFormPost guestForm

@@ -11,5 +11,6 @@
 /formtest FormTestR GET POST
 
 /guest            GuestCreateR GET POST
+/guest/#GuestId   GuestR       GET      PUT DELETE
 
 /guestinserttest GuestInsertTestR GET

@@ -21,6 +21,13 @@ guestForm = renderDivs $ Guest
     <*> areq boolField "Attend" Nothing
     <*> areq enumFieldList "Blood" Nothing
 
+guestForm' :: Guest -> Form Guest
+guestForm' guest = renderDivs $ Guest
+    <$> areq textField "Name" (Just $ guestName guest)
+    <*> areq intField  "Age"  (Just $ guestAge guest)
+    <*> areq boolField "Attend" (Just $ guestAttend guest)
+    <*> areq enumFieldList "Blood" (Just $ guestBlood guest)
+
 
 data ItemForm = ItemForm
     { itemFormName      :: Text
