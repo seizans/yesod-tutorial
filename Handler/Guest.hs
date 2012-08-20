@@ -5,7 +5,7 @@ import Import
 getGuestR :: GuestId -> Handler RepHtml
 getGuestR guestId = do
     guest <- runDB $ get404 guestId
-    (formWidget, formEnctype) <- generateFormPost $ guestForm' guest
+    (formWidget, formEnctype) <- generateFormPost $ guestForm' (Just guest)
     defaultLayout $ $(widgetFile "form")
 
 putGuestR :: GuestId -> Handler RepHtml

@@ -15,18 +15,14 @@ enumPairs = map (T.pack . show &&& id ) $ [minBound..maxBound]
 
 
 guestForm :: Form Guest
-guestForm = renderDivs $ Guest
-    <$> areq textField "Name" Nothing
-    <*> areq intField  "Age"  Nothing
-    <*> areq boolField "Attend" Nothing
-    <*> areq enumFieldList "Blood" Nothing
+guestForm = guestForm' Nothing
 
-guestForm' :: Guest -> Form Guest
-guestForm' guest = renderDivs $ Guest
-    <$> areq textField "Name" (Just $ guestName guest)
-    <*> areq intField  "Age"  (Just $ guestAge guest)
-    <*> areq boolField "Attend" (Just $ guestAttend guest)
-    <*> areq enumFieldList "Blood" (Just $ guestBlood guest)
+guestForm' :: Maybe Guest -> Form Guest
+guestForm' mguest = renderDivs $ Guest
+    <$> areq textField "Name"      (guestName   <$> mguest)
+    <*> areq intField  "Age"       (guestAge    <$> mguest)
+    <*> areq boolField "Attend"    (guestAttend <$> mguest)
+    <*> areq enumFieldList "Blood" (guestBlood  <$> mguest)
 
 
 data ItemForm = ItemForm
