@@ -24,4 +24,10 @@ getFormTestR = do
     defaultLayout widget
 
 postFormTestR :: Handler RepHtml
-postFormTestR = error "Not yet implemented: postFormTestR"
+postFormTestR = do
+    ((formResult, formWidget), formEnctype) <- runFormPost itemForm
+    case formResult of
+        FormMissing -> liftIO $ print "FORM MISSING"
+        FormFailure ts -> liftIO $ print ts
+        FormSuccess itemForm -> liftIO $ print itemForm
+    defaultLayout $ $(widgetFile "form")
