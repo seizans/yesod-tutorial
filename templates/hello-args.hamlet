@@ -1,3 +1,11 @@
 <h1>Hello Args
 <h3>#{s}
 <h3>#{i}
+
+<ul>
+    <li>
+        <a href=@{HelloR}>HelloR
+    <li>
+        <a href=@{HelloArgsR "textarg" 3}>HelloArgsR textarg 3
+
+^{helloWidget}

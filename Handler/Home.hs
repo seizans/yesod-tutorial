@@ -5,6 +5,7 @@ import Import
 
 getHelloArgsR :: Text -> Int -> Handler RepHtml
 getHelloArgsR s i = do
+    let helloWidget = $(widgetFile "hello")
     let widget = $(widgetFile "hello-args")
     defaultLayout widget
 
