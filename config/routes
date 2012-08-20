@@ -8,3 +8,4 @@
 
 /hello HelloR GET
 /hello/#Text/#Int HelloArgsR GET
+/formtest FormTestR GET POST

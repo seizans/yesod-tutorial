@@ -1,0 +1,3 @@
+<form method=post enctype=#{formEnctype}>
+    ^{formWidget}
+    <input type=submit>

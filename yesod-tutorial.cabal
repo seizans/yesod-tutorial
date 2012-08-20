@@ -30,6 +30,7 @@ library
                      Settings.Development
                      Handler.Home
                      Handler.Hello
+                     Handler.FormTest
 
     if flag(dev) || flag(library-only)
         cpp-options:   -DDEVELOPMENT
