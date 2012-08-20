@@ -1,18 +1,6 @@
 module Handler.Guest where
 
 import Import
-import qualified Data.Text as T
-
-guestForm :: Form Guest
-guestForm = renderDivs $ Guest
-    <$> areq textField "Name" Nothing
-    <*> areq intField  "Age"  Nothing
-    <*> areq boolField "Attend" Nothing
-    <*> areq enumFieldList "Blood" Nothing
-
--- Enum系の型のドロップダウンのための関数
-enumFieldList = selectFieldList enumPairs
-enumPairs = map (T.pack . show &&& id ) $ [minBound..maxBound]
 
 getGuestR :: Handler RepHtml
 getGuestR = do

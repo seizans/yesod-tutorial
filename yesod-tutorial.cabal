@@ -22,6 +22,7 @@ Flag library-only
 
 library
     exposed-modules: Application
+                     Forms
                      Foundation
                      Import
                      Model
