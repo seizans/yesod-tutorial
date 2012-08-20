@@ -3,7 +3,7 @@ module Handler.Home where
 
 import Import
 
-getHelloArgsR :: String -> Int -> Handler RepHtml
+getHelloArgsR :: Text -> Int -> Handler RepHtml
 getHelloArgsR s i = do
     let widget = $(widgetFile "hello-args")
     defaultLayout widget
