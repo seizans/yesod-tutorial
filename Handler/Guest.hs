@@ -9,10 +9,27 @@ getGuestR guestId = do
     defaultLayout $ $(widgetFile "form")
 
 putGuestR :: GuestId -> Handler RepHtml
-putGuestR guestId = undefined
+putGuestR guestId = do
+    ((formResult, formWidget), formEnctype) <- runFormPost guestForm
+    case formResult of
+        FormSuccess guest -> do
+            runDB $ do
+                _guest <- get404 guestId
+                update guestId
+                    [ GuestName   =. guestName   guest
+                    , GuestAge    =. guestAge    guest
+                    , GuestAttend =. guestAttend guest
+                    , GuestBlood  =. guestBlood  guest
+                    ]
+            defaultLayout $ $(widgetFile "form")
+        _ -> defaultLayout $ $(widgetFile "form")
 
 deleteGuestR :: GuestId -> Handler RepHtml
-deleteGuestR guestId = undefined
+deleteGuestR guestId = do
+    runDB $ do
+        _guest <- get404 guestId
+        delete guestId
+    defaultLayout $ $(widgetFile "hello")
 
 
 getGuestCreateR :: Handler RepHtml
