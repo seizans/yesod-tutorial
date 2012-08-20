@@ -1,0 +1,22 @@
+var ajaxPut = function () {
+    var formContents = $('#form').serialize();
+    var sendData = 
+      { type: 'PUT'
+      , data: formContents
+      , success: function(data) { alert('PUTリクエストは成功しました.'); }
+      };
+    $.ajax(sendData);
+};
+
+var ajaxDelete = function () {
+    var sendData = 
+      { type: 'DELETE'
+      , success: function(data) { alert('DELETEリクエストは成功しました.'); }
+      };
+    $.ajax(sendData);
+};
+
+$(document).ready(function() {
+    $('#put').click(ajaxPut);
+    $('#delete').click(ajaxDelete);
+});

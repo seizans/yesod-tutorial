@@ -1,3 +1,5 @@
-<form method=post enctype=#{formEnctype}>
+<form #form method=post enctype=#{formEnctype}>
     ^{formWidget}
     <input type=submit>
+    <input #put type=button value=PutButton>
+    <input #delete type=button value=DeleteButton>
