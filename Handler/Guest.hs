@@ -2,6 +2,12 @@ module Handler.Guest where
 
 import Import
 
+getGuestsR :: Handler RepHtml
+getGuestsR = do
+    guestEntities <- runDB $ selectList [] []
+    -- GuestEntity は { entityKey :: GuestId, entityVal :: Guest } という感じ
+    defaultLayout $ $(widgetFile "guest-list")
+
 getGuestR :: GuestId -> Handler RepHtml
 getGuestR guestId = do
     guest <- runDB $ get404 guestId

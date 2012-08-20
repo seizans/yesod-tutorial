@@ -1,0 +1,16 @@
+<table>
+    <tr>
+        <th>Name
+        <th>Age
+        <th>Attend
+        <th>Blood
+        <th>Modify
+    $forall guestEntity <- guestEntities
+      <tr>
+        $with (guestId, guest) <- (entityKey guestEntity, entityVal guestEntity)
+          <td>#{guestName guest}
+          <td>#{guestAge guest}
+          <td>#{guestAttend guest}
+          <td>#{show $ guestBlood guest}
+          <td>
+            <a href=@{GuestR guestId}>modify

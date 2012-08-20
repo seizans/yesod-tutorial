@@ -10,6 +10,7 @@
 /hello/#Text/#Int HelloArgsR GET
 /formtest FormTestR GET POST
 
+/guests           GuestsR      GET
 /guest            GuestCreateR GET POST
 /guest/#GuestId   GuestR       GET      PUT DELETE
 
