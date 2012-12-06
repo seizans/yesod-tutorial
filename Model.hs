@@ -9,9 +9,22 @@ data Blood = A | B | O | AB
   deriving (Show, Read, Eq, Ord, Enum, Bounded)
 derivePersistField "Blood"
 
--- You can define all of your database entities in the entities file.
--- You can find more information on persistent and how to declare entities
--- at:
--- http://www.yesodweb.com/book/persistent/
-share [mkPersist sqlSettings, mkMigrate "migrateAll"]
-    $(persistFileWith lowerCaseSettings "config/models")
+share [mkPersist sqlSettings, mkMigrate "migrateAll"] [persist|
+
+User
+    ident Text
+    password Text Maybe
+    UniqueUser ident
+Email
+    email Text
+    user UserId Maybe
+    verkey Text Maybe
+    UniqueEmail email
+
+Guest
+    name   Text
+    age    Int
+    attend Bool
+    blood  Blood
+
+|]
