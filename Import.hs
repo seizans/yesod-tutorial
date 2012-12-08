@@ -7,6 +7,7 @@ module Import
     , module Data.Monoid
     , module Control.Applicative
     , module Forms
+    , module Widget
     , Text
 #if __GLASGOW_HASKELL__ < 704
     , (<>)
@@ -26,6 +27,7 @@ import Data.Text (Text)
 import Settings.StaticFiles
 import Settings.Development
 import Forms
+import Widget
 
 #if __GLASGOW_HASKELL__ < 704
 infixr 5 <>

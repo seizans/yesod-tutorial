@@ -33,6 +33,7 @@ library
                      Handler.Hello
                      Handler.FormTest
                      Handler.Guest
+                     Widget
 
     if flag(dev) || flag(library-only)
         cpp-options:   -DDEVELOPMENT

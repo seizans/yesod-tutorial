@@ -4,15 +4,14 @@ import Import
 
 getFormTestR :: Handler RepHtml
 getFormTestR = do
-    (formWidget, formEnctype) <- generateFormPost itemForm
-    let widget = $(widgetFile "form")
-    defaultLayout widget
+    (fWidget, fEnctype) <- generateFormPost itemForm
+    defaultLayout $ formPageWidget fWidget fEnctype
 
 postFormTestR :: Handler RepHtml
 postFormTestR = do
-    ((formResult, formWidget), formEnctype) <- runFormPost itemForm
-    case formResult of
+    ((fResult, fWidget), fEnctype) <- runFormPost itemForm
+    case fResult of
         FormMissing -> liftIO $ print "FORM MISSING"
         FormFailure ts -> liftIO $ print ts
-        FormSuccess itemForm -> liftIO $ print itemForm
-    defaultLayout $ $(widgetFile "form")
+        FormSuccess i -> liftIO $ print i
+    defaultLayout $ formPageWidget fWidget fEnctype
