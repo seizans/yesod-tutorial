@@ -6,21 +6,19 @@ getGuestsR :: Handler RepHtml
 getGuestsR = do
     guestEntities <- runDB $ selectList [] []
     -- GuestEntity は { entityKey :: GuestId, entityVal :: Guest } という感じ
-    (formWidget, formEnctype) <- generateFormPost guestForm
-    let guestFormWidget = $(widgetFile "form")
-        listWidget = $(widgetFile "guest-list")
-    defaultLayout $ $(widgetFile "guest-portal")
+    (fWidget, fEnctype) <- generateFormPost guestForm
+    defaultLayout $ guestPortalWidget guestEntities fWidget fEnctype
 
 getGuestR :: GuestId -> Handler RepHtml
 getGuestR guestId = do
     guest <- runDB $ get404 guestId
-    (formWidget, formEnctype) <- generateFormPost $ guestForm' (Just guest)
-    defaultLayout $ $(widgetFile "form")
+    (fWidget, fEnctype) <- generateFormPost $ guestForm' (Just guest)
+    defaultLayout $ formPageWidget fWidget fEnctype
 
 putGuestR :: GuestId -> Handler RepHtml
 putGuestR guestId = do
-    ((formResult, formWidget), formEnctype) <- runFormPost guestForm
-    case formResult of
+    ((fResult, fWidget), fEnctype) <- runFormPost guestForm
+    case fResult of
         FormSuccess guest -> do
             runDB $ do
                 _guest <- get404 guestId
@@ -30,30 +28,30 @@ putGuestR guestId = do
                     , GuestAttend =. guestAttend guest
                     , GuestBlood  =. guestBlood  guest
                     ]
-            defaultLayout $ $(widgetFile "form")
-        _ -> defaultLayout $ $(widgetFile "form")
+            defaultLayout $ formPageWidget fWidget fEnctype
+        _ -> defaultLayout $ formPageWidget fWidget fEnctype
 
 deleteGuestR :: GuestId -> Handler RepHtml
 deleteGuestR guestId = do
     runDB $ do
         _guest <- get404 guestId
         delete guestId
-    defaultLayout $ $(widgetFile "hello")
+    defaultLayout helloWidget
 
 
 getGuestCreateR :: Handler RepHtml
 getGuestCreateR = do
-    (formWidget, formEnctype) <- generateFormPost guestForm
-    defaultLayout $ $(widgetFile "form")
+    (fWidget, fEnctype) <- generateFormPost guestForm
+    defaultLayout $ formPageWidget fWidget fEnctype
 
 postGuestCreateR :: Handler RepHtml
 postGuestCreateR = do
-    ((formResult, formWidget), formEnctype) <- runFormPost guestForm
-    case formResult of
+    ((fResult, fWidget), fEnctype) <- runFormPost guestForm
+    case fResult of
         FormSuccess guest -> do
             _guestId <- runDB $ insert guest
-            defaultLayout $ $(widgetFile "form")
-        _ -> defaultLayout $ $(widgetFile "form")
+            defaultLayout $ formPageWidget fWidget fEnctype
+        _ -> defaultLayout $ formPageWidget fWidget fEnctype
 
 getGuestInsertTestR :: Handler RepHtml
 getGuestInsertTestR = do
@@ -64,4 +62,4 @@ getGuestInsertTestR = do
             , guestBlood  = O
             }
     _guestId <- runDB $ insert guest
-    defaultLayout $ $(widgetFile "hello")
+    defaultLayout helloWidget
