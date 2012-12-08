@@ -22,7 +22,7 @@ Flag library-only
 
 library
     exposed-modules: Application
-                     Forms
+    other-modules:   Forms
                      Foundation
                      Import
                      Model
